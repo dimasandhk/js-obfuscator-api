@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/app -e js,json",
+    "dev": "nodemon src/app -e js,json,html",
     "start": "node src/app"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "js-beautify": "^1.13.13",
+    "json-beautify": "^1.1.1"
   },
   "devDependencies": {
     "javascript-obfuscator": "^2.12.0",
