@@ -53,6 +53,17 @@ app.get("/api/*", (_req, res) => {
   });
 });
 
+app.get("*", (_req, res) => {
+  res.send({
+    error: true,
+    message: "Route not found",
+    available: {
+      required: "api/obfuscate",
+      home: "/",
+    },
+  });
+});
+
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
 });
