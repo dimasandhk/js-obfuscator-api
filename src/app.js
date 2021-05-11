@@ -34,7 +34,8 @@ app.get("/api/obfuscate", (req, res) => {
       error: false,
       status: res.statusCode,
       codeParams,
-      result: obfuscator.obfuscate(codeParams),
+      detail: obfuscator.obfuscate(codeParams),
+      result: obfuscator.obfuscate(codeParams).getObfuscatedCode(),
     });
   } catch (err) {
     return res.send({
