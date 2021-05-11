@@ -18,15 +18,6 @@ app.get("/", (_req, res) => {
       },
     })
   );
-
-  console.log({
-    error: false,
-    status: res.statusCode,
-    endpoint: "api/obfuscate",
-    query: {
-      required: "?code=",
-    },
-  });
 });
 
 app.get("/api/obfuscate", (req, res) => {
@@ -52,6 +43,14 @@ app.get("/api/obfuscate", (req, res) => {
       message: `${err}`,
     });
   }
+});
+
+app.get("/api/*", (_req, res) => {
+  res.send({
+    error: false,
+    status: res.statusCode,
+    message: "The only available endpoint is api/obfuscate",
+  });
 });
 
 app.listen(port, () => {
