@@ -1,4 +1,5 @@
 # Javascript Obfuscator API
 
-Endpoint = /api/obfuscate
-Query (Required) = /api/obfuscate?code={YOUR_CODE}
+Endpoint = <code>/api/obfuscate</code>
+<br>
+Query (Required) = <code>/api/obfuscate?code={YOUR_CODE}</code>
