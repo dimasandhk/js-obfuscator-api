@@ -13,6 +13,8 @@ app.get("/", (_req, res) => {
       error: false,
       status: res.statusCode,
       endpoint: "api/obfuscate",
+      about:
+        "Code obfuscation is the technique of making the source code of an application difficult to read and comprehend so it becomes almost impossible for any unauthorized third-party group or individual, using any available tools, to reverse engineer it",
       query: {
         required: "?code=",
       },
@@ -20,38 +22,38 @@ app.get("/", (_req, res) => {
   );
 });
 
-app.get("/api/obfuscate", (req, res) => {
-  const codeParams = req.query.code;
-  if (!codeParams)
+app.get("/api/:type", (req, res) => {
+  const codeQuery = req.query.code;
+  const apiType = req.params.type;
+
+  if (apiType !== "obfuscate")
+    return res.send({
+      error: true,
+      message: "The only available params is api/obfuscate",
+    });
+
+  if (!codeQuery)
     return res.send({
       error: true,
       message: "Code Parameter / Query must be provided",
-      codeParams: codeParams || "",
+      codeQuery: codeQuery || "",
     });
 
   try {
     res.send({
       error: false,
       status: res.statusCode,
-      codeParams,
-      detail: obfuscator.obfuscate(codeParams),
-      result: obfuscator.obfuscate(codeParams).getObfuscatedCode(),
+      codeQuery,
+      detail: obfuscator.obfuscate(codeQuery).options,
+      result: obfuscator.obfuscate(codeQuery).getObfuscatedCode(),
     });
   } catch (err) {
     return res.send({
       error: true,
-      codeParams,
+      codeQuery,
       message: `${err}`,
     });
   }
-});
-
-app.get("/api/*", (_req, res) => {
-  res.send({
-    error: false,
-    status: res.statusCode,
-    message: "The only available endpoint is api/obfuscate",
-  });
 });
 
 app.get("*", (_req, res) => {
